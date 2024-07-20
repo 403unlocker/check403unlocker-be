@@ -1,0 +1,2 @@
+fastapi==0.111.1
+beautifulsoup4==4.12.3
