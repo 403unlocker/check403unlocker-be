@@ -23,9 +23,9 @@ def GetShecan(url):
 def GetBegzar(url):
     return GetGetBegzarHandler(url)
 
-# @app.get("/anti403")
-# def Get403(url):
-#     return GetAnti403Handler(url)
+@app.get("/anti403")
+def Get403(url):
+    return GetAnti403Handler(url)
 
 @app.get("/vanillapp")
 def GetVanillapp(url):
