@@ -3,8 +3,17 @@ from services.Anti403 import GetAnti403Handler
 from services.Begzar import GetGetBegzarHandler
 from services.Vanillapp import GetVanillappHandler
 from services.Shecan import GetShecanHandler
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
 
 @app.get("/shecan")
 def GetShecan(url):
