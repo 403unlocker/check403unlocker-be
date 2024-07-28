@@ -16,7 +16,6 @@ class Handler:
 
         response = await self.httpx_client.post(url)
         if response.status_code == 200:
-            print("Form submitted successfully!")
             result_soup = BeautifulSoup(response.text, 'html.parser')
             message_box = result_soup.find("p", {"class": "messagebox"})
             if message_box:
