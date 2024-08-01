@@ -8,12 +8,12 @@ from httpx import AsyncClient
 router = APIRouter()
 
 
-@router.get("/vanilla")
+@router.get("/vanillapp")
 async def get_vanilla(url:str,client:AsyncClient = Depends(get_httpx_client)):
     obj_handler = Handler(client)
 
     result = await obj_handler.get_vanilla(url)
 
-    return {"successful":result}
+    return {"IsSuccess":result}
 
 

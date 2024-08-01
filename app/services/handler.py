@@ -1,11 +1,12 @@
+import json
 from typing import Union
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from httpx import AsyncClient
 
 
 
 class Handler:
-
     def __init__(self,httpx_client:AsyncClient) -> None:
         self.httpx_client = httpx_client
         
@@ -21,16 +22,14 @@ class Handler:
             if message_box:
                 isSuccess = message_box.text == " این سایت ایران را تحریم کرده است و شکن آن را پشتیبانی می‌کند."
                 return isSuccess
-            
+    
 
     async def get_vanilla(self, url: str) -> bool:
-        url = f'https://vanillapp.ir/api/check/?target={url}'
-        
-        response = await self.httpx_client.get(url=url)
-        if response.status_code == 200:
-                data = response.json()
-                return data.get('status', False)
-        return False
+        data = urlopen(f'https://vanillapp.ir/api/check/?target={url}').read()
+        response = json.loads(data)
+        if response.status_code != 200:
+            return False
+        return response['status']
     
 
     async def get_begzar(self, url: str) -> bool:
@@ -68,13 +67,8 @@ class Handler:
         return False
     
 
-
     async def get_anti403(self,url:str) -> bool:
-        url = f'https://api.anti403.ir/api/search-filter?url={url}'
-
-        response = await self.httpx_client.get(url=url)
-        if response.status_code == 200:
-                data = response.json()
-                return data.get('status', False)
-        return False
+        data = urlopen(f'https://api.anti403.ir/api/search-filter?url={url}').read()
+        parseToJson = json.loads(data)
+        return parseToJson["result"]["support"]
     

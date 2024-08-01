@@ -14,6 +14,6 @@ async def get_schecan(url:str,client:AsyncClient = Depends(get_httpx_client)):
 
     result = await obj_handler.get_shecan(url)
 
-    return {"successful":result}
+    return {"IsSuccess":result}
 
 

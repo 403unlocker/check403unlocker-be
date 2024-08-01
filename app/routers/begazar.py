@@ -14,6 +14,6 @@ async def get_begzar(url:str,client:AsyncClient = Depends(get_httpx_client)):
 
     result = await obj_handler.get_begzar(url)
 
-    return {"successful":result}
+    return {"IsSuccess":result}
 
 
