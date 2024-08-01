@@ -8,8 +8,8 @@ from httpx import AsyncClient
 router = APIRouter()
 
 
-@router.get("/bagzar")
-async def get_bagzar(url:str,client:AsyncClient = Depends(get_httpx_client)):
+@router.get("/begzar")
+async def get_begzar(url:str,client:AsyncClient = Depends(get_httpx_client)):
     obj_handler = Handler(client)
 
     result = await obj_handler.get_begzar(url)
