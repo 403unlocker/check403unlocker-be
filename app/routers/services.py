@@ -17,12 +17,15 @@ async def get_services(url:str,client:AsyncClient = Depends(get_httpx_client)):
     begzar_task = obj_handler.get_begzar(url)
     anti403_task = obj_handler.get_anti403(url)
     shecan_task = obj_handler.get_shecan(url)
+    darzgir_task = obj_handler.get_darzgir(url)
+
     # vanillapp_task = obj_handler.get_vanilla(url)
 
-    begzarResponse, anti403Response, shecanResponse = await asyncio.gather(
+    begzarResponse, anti403Response, shecanResponse, darzgirResponse = await asyncio.gather(
         begzar_task, 
         anti403_task, 
-        shecan_task
+        shecan_task,
+        darzgir_task
         # vanillapp_task
     )
 
@@ -30,5 +33,6 @@ async def get_services(url:str,client:AsyncClient = Depends(get_httpx_client)):
         "begzar": begzarResponse,
         "anti403": anti403Response,
         "shecan": shecanResponse,
+        "darzgir": darzgirResponse,
         # "vanillapp": vanillappResponse,
     }}

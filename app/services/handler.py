@@ -72,3 +72,13 @@ class Handler:
         parseToJson = json.loads(data)
         return parseToJson["result"]["support"]
     
+    
+    async def get_darzgir(self, url: str) -> bool:
+        url = f'https://api.darzg.ir/v1/domains/{url}/'
+
+        response = await self.httpx_client.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            return data['message'] == 'domain is supported!'
+
+        return False
