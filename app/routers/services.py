@@ -14,12 +14,13 @@ router = APIRouter()
 async def get_services(url:str,client:AsyncClient = Depends(get_httpx_client)):
     obj_handler = Handler(client)
 
+    shecan_task = obj_handler.get_shecan(url)
     begzar_task = obj_handler.get_begzar(url)
     anti403_task = obj_handler.get_anti403(url)
-    shecan_task = obj_handler.get_shecan(url)
     darzgir_task = obj_handler.get_darzgir(url)
-
     # vanillapp_task = obj_handler.get_vanilla(url)
+
+
 
     begzarResponse, anti403Response, shecanResponse, darzgirResponse = await asyncio.gather(
         begzar_task, 

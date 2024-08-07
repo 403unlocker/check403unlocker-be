@@ -49,7 +49,7 @@ class Handler:
         input_name = form.find('input', {'name': 'domain_name'}).get('name')
 
         post_data = {
-                input_name: url,
+                input_name: f"https://{url}",
                 'search_domain': 'بررسی کن'
             }
 
