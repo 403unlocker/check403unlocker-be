@@ -1,14 +1,16 @@
 ## Installation
 
-### Using Poetry
+### On Your Local Machine
 
-To install the project dependencies using Poetry, ensure that Poetry is installed on your system. You can install Poetry by following the official [Poetry installation guide](https://python-poetry.org/docs/#installation).
+1. **Install tools**: Install All tools the project need Such as Python and Pypi.
+2. **Install Requirements**: Install All Requirements Using `pip install -r requirements.txt `.
+3. **Run Application**: Run the Application Using `python run.py`.
 
-Once Poetry is installed, you can install the dependencies by navigating to the project directory and running:
+### Using Docker
 
-```bash
-poetry install
-```
+1. **Install tools**: Make sure you have already installed the Docker.
+2. **Build Image**: build Image of project using `docker build .` command.
+3. **Run Container**: Run the Container using `docker run check403unlocker-be` command.
 
 ## Contact
 
