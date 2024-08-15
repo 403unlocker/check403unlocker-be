@@ -16,20 +16,22 @@ class Handler:
         url = f'https://shecan.ir/?url=https%3A%2F%2F{url}#report'
 
         response = await self.httpx_client.post(url)
-        if response.status_code == 200:
-            result_soup = BeautifulSoup(response.text, 'html.parser')
-            message_box = result_soup.find("p", {"class": "messagebox"})
-            if message_box:
-                isSuccess = message_box.text == " این سایت ایران را تحریم کرده است و شکن آن را پشتیبانی می‌کند."
-                return isSuccess
+        if response.status_code != 200:
+            return False
+        result_soup = BeautifulSoup(response.text, 'html.parser')
+        message_box = result_soup.find("p", {"class": "messagebox"})
+        if message_box:
+            isSuccess = message_box.text == " این سایت ایران را تحریم کرده است و شکن آن را پشتیبانی می‌کند."
+            return isSuccess
     
 
     async def get_vanilla(self, url: str) -> bool:
-        data = urlopen(f'https://vanillapp.ir/api/check/?target={url}').read()
-        response = json.loads(data)
+        url = f'https://vanillapp.ir/api/check/?target={url}'
+        response = await self.httpx_client.get(url)
         if response.status_code != 200:
             return False
-        return response['status']
+        data = response.json()
+        return data['status']
     
 
     async def get_begzar(self, url: str) -> bool:
