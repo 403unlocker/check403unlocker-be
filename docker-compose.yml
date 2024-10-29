@@ -1,7 +1,20 @@
+networks:
+  web-proxy:
+    external: true
+    name: web-proxy
+
 services:
-  web: 
+  web:
     build:
       context: .
-    ports: 
-      - '8080:8080'
-    restart: always
+ #   ports:
+ #     - '8080:8080'
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - web-proxy
